@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'John Doe',
             'email' => 'john@gmail.com'
         ]);
-
+/*
         Listing::factory(6)->create([
             'user_id' => $user->id
         ]);
-
+*/
         // Listing::create([
         //     'title' => 'Laravel Senior Developer', 
         //     'tags' => 'laravel, javascript',
