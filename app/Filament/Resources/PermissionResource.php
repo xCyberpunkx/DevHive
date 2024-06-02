@@ -2,22 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\RoleResource\Pages;
-use App\Filament\Resources\RoleResource\RelationManagers;
+use App\Filament\Resources\PermissionResource\Pages;
+use App\Filament\Resources\PermissionResource\RelationManagers;
 use Filament\Forms;
-use Filament\Forms\Components\Card;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use \Spatie\Permission\Models\Role;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\TextColumn;
-class RoleResource extends Resource
+
+class PermissionResource extends Resource
 {
-    protected static ?string $model = Role::class;
+    protected static ?string $model = \Spatie\Permission\Models\Permission::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -25,13 +24,9 @@ class RoleResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()->schema([
-                  TextInput::make('title')
+                TextInput::make('name')
     ->minLength(2)
-    ->maxLength(255)  
-                ]
-                )->columns(2)
-    
+    ->maxLength(255)
             ]);
     }
 
@@ -39,7 +34,7 @@ class RoleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable(),
+                TextColumn::make('name'),
             ])
             ->filters([
                 //
@@ -62,9 +57,9 @@ class RoleResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRoles::route('/'),
-            'create' => Pages\CreateRole::route('/create'),
-            'edit' => Pages\EditRole::route('/{record}/edit'),
+            'index' => Pages\ListPermissions::route('/'),
+            'create' => Pages\CreatePermission::route('/create'),
+            'edit' => Pages\EditPermission::route('/{record}/edit'),
         ];
     }    
 }
