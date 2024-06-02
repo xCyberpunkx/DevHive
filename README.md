@@ -1,4 +1,5 @@
 # DevHive
+<<<<<<< HEAD
 
 
 
@@ -36,3 +37,6 @@ php artisan serve
 ## License
 
 The LaraGigs app is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+80% complete
+>>>>>>> 6c7c6f073f778fb29899e5a8a11040487eecf3e6
