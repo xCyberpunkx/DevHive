@@ -14,7 +14,8 @@ return [
     | any other location as required by the application or its packages.
     |
     */
-
+    Filament\FilamentServiceProvider::class,
+    
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
