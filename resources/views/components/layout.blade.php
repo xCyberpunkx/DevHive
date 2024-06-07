@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,35 +9,23 @@
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="//unpkg.com/alpinejs" defer></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .transition-transform {
-      transition: transform 0.3s ease-in-out;
-    }
-    .bg-custom-blue { background-color: #201658; }
-    .bg-custom-sea { background-color: #98ABEE; }
-    .bg-custom-beige { background-color: #F9E8C9; }
-  </style>
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+  <title> DevHive | Where Developers Thrive</title>
   <script>
-    tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              laravel: '#f6993f',
-            },
-          },
-        },
-      }
-  </script>
-  <title> DevHive |  Where Developers Thrive</title>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+</script>
 </head>
-
 <body class="mb-48">
   
   <!----
   
   <nav class=" flex  justify-between items-center mb-4">
-    <a href="/"><img class="w-24 " src="{{asset('images/logo.png')}}" alt="" class="logo" /></a>
+    <a href="/">DevHive</a>
     <ul class="flex space-x-6 mr-6 text-lg">
       @auth
       <li>
@@ -68,14 +55,17 @@
     </ul>
   </nav>
   ----->
-  <nav class=" flex  justify-between items-center mb-4">
-    <a href="/"><img class="w-24 " src="{{asset('images/logo.png')}}" alt="" class="logo" /></a>
-    <ul class="flex space-x-6 mr-6 text-lg">
+  <nav class=" flex  justify-between items-center mb-4 ">
+    <a href="/"  class=" font-semibold text-gray-800 text-4xl px-4 mx-10 dark:text-neutral-200"><span class="text-laravel">Dev</span>Hive</a>
+    <ul class="flex space-x-6 mr-6 text-sm">
       @auth
       <li>
         <span class=" font-bold uppercase">
           Welcome {{auth()->user()->name}}
         </span>
+      </li>
+      <li>
+        
       </li>
       <li>
         <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Listings</a>
@@ -102,13 +92,22 @@
   <main>
     {{$slot}}
   </main>
-  
-  <footer
-    class="bg-laravel  fixed bottom-0 left-0 w-full flex items-center justify-start font-bold  text-white h-24 mt-24 opacity-90 md:justify-center">
-    <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
+  <footer class="fixed bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="#" class="hover:underline">DevHive™</a>. All Rights Reserved.
+    </span>
+    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+        <li>
+            <a href="/listings/create" class="hover:underline me-4 md:me-6 text-laravel">Post job</a>
+        </li>
+        <li>
+            <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+        </li>
+        <li>
+            <a href="#" class="hover:underline">Contact</a>
+        </li>
+    </ul>
+</footer>
 
-    <a href="/listings/create" class="absolute top-1/3 right-10 bg-white text-laravel hover:bg-laravel hover:text-white py-2 px-5">Post Job</a>
-  </footer>
 
   <x-flash-message />
 </body>

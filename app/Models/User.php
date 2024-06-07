@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -44,18 +44,25 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
     ];
 
-    // Relationship With Listings
+    // Define relationship with Listing model
     public function listings() {
         return $this->hasMany(Listing::class, 'user_id');
     }
+
     /**
+     * Determine if the user can access the Filament admin panel.
+     *
+     * @param Panel $panel
      * @return bool
      */
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->hasRole('admin');
     }
+
     /**
+     * Determine if the user can access Filament.
+     *
      * @return bool
      */
     public function canAccessFilament(): bool {
