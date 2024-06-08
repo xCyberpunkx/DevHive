@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $adminUser->assignRole($adminRole);
 
         // Create listings associated with the admin user
-        Listing::factory(6)->create([
+        Listing::factory(8)->create([
             'user_id' => $adminUser->id,
         ]);
 

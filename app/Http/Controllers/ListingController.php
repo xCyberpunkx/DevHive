@@ -12,7 +12,7 @@ class ListingController extends Controller
     // Fetches all listings, applies filtering (if any) and pagination, then returns the view
     public function index() {
         return view('listings.index', [
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(4)
         ]);
     }
 
@@ -40,12 +40,14 @@ class ListingController extends Controller
             'website' => 'required',
             'email' => ['required', 'email'],
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Store logo if uploaded
         if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+            
         }
 
         // Associate the listing with the logged-in user
@@ -91,7 +93,7 @@ class ListingController extends Controller
         $listing->update($formFields);
 
         // Redirect back with a success message
-        return back()->with('message', 'Listing updated successfully!');
+        return redirect('/')->with('message', 'Listing updated successfully!');
     }
 
     // Delete Listing

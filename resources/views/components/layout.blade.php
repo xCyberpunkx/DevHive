@@ -11,14 +11,8 @@
   <script src="//unpkg.com/alpinejs" defer></script>
   <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
   <title> DevHive | Where Developers Thrive</title>
-  <script>
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark')
-    }
-</script>
+  @stack('scripts')
+
 </head>
 <body class="mb-48">
   
@@ -64,9 +58,11 @@
           Welcome {{auth()->user()->name}}
         </span>
       </li>
+      @if(auth()->user()->hasRole('admin')) <!-- Adjust this condition based on your role-checking logic -->
       <li>
-        
+        <a href="/admin" class="hover:text-laravel"><i class="fa-solid fa-tachometer-alt"></i> Dashboard</a>
       </li>
+      @endif
       <li>
         <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Listings</a>
       </li>
@@ -91,7 +87,9 @@
 
   <main>
     {{$slot}}
+    
   </main>
+  
   <footer class="fixed bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
     <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="#" class="hover:underline">DevHive™</a>. All Rights Reserved.
     </span>
@@ -110,6 +108,7 @@
 
 
   <x-flash-message />
+  
 </body>
 
 </html>

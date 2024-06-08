@@ -4,6 +4,7 @@ module.exports = {
     './resources/views/**/*.blade.php',
     './resources/js/**/*.js',
   ],
+  mode: 'jit',
   darkMode: 'class',
   theme: {
     extend: {

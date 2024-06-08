@@ -10,7 +10,7 @@ class Listing extends Model
     use HasFactory;
 
     // Define fillable attributes for mass assignment
-    protected $fillable = ['title', 'company', 'location', 'website', 'email', 'description', 'tags'];
+    protected $fillable = ['title', 'company', 'location', 'website', 'email','logo', 'description', 'tags'];
 
     // Scope for filtering listings based on tags and search query
     public function scopeFilter($query, array $filters) {
