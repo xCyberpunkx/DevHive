@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -64,3 +65,6 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 // Log In User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+// contact form 
+Route::view('/contact', 'contact.show')->name('contact.show');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
