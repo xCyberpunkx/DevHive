@@ -1,4 +1,7 @@
 <x-layout>
+  <a href="/" class="inline-block text-gray-700 ml-4 mb-4 hover:text-gray-900 transition">
+    <i class="fa-solid fa-arrow-left"></i> Back
+  </a>
   <x-card class="p-10">
     <header>
       <h1 class="text-3xl text-center font-bold my-6 uppercase">
