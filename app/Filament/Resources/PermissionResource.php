@@ -18,7 +18,7 @@ class PermissionResource extends Resource
 {
     protected static ?string $model = \Spatie\Permission\Models\Permission::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
 
     public static function form(Form $form): Form
     {

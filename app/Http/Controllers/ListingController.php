@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
@@ -10,13 +9,15 @@ use Illuminate\Validation\Rule;
 class ListingController extends Controller
 {
     // Show all listings
+    // Fetches all listings, applies filtering (if any) and pagination, then returns the view
     public function index() {
         return view('listings.index', [
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(4)
         ]);
     }
 
-    //Show single listing
+    // Show single listing
+    // Fetches a single listing by its ID and returns the view
     public function show(Listing $listing) {
         return view('listings.show', [
             'listing' => $listing
@@ -24,11 +25,13 @@ class ListingController extends Controller
     }
 
     // Show Create Form
+    // Returns the view for creating a new listing
     public function create() {
         return view('listings.create');
     }
 
     // Store Listing Data
+    // Validates and stores a new listing in the database
     public function store(Request $request) {
         $formFields = $request->validate([
             'title' => 'required',
@@ -37,28 +40,36 @@ class ListingController extends Controller
             'website' => 'required',
             'email' => ['required', 'email'],
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        // Store logo if uploaded
         if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+            
         }
 
+        // Associate the listing with the logged-in user
         $formFields['user_id'] = auth()->id();
 
+        // Create the listing
         Listing::create($formFields);
 
+        // Redirect to home with a success message
         return redirect('/')->with('message', 'Listing created successfully!');
     }
 
     // Show Edit Form
+    // Returns the view for editing an existing listing
     public function edit(Listing $listing) {
         return view('listings.edit', ['listing' => $listing]);
     }
 
     // Update Listing Data
+    // Validates and updates an existing listing in the database
     public function update(Request $request, Listing $listing) {
-        // Make sure logged in user is owner
+        // Ensure the logged-in user is the owner of the listing
         if($listing->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
@@ -73,30 +84,38 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
+        // Store new logo if uploaded
         if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
+        // Update the listing
         $listing->update($formFields);
 
-        return back()->with('message', 'Listing updated successfully!');
+        // Redirect back with a success message
+        return redirect('/')->with('message', 'Listing updated successfully!');
     }
 
     // Delete Listing
+    // Deletes an existing listing from the database
     public function destroy(Listing $listing) {
-        // Make sure logged in user is owner
+        // Ensure the logged-in user is the owner of the listing
         if($listing->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
         
+        // Delete the logo file from storage if it exists
         if($listing->logo && Storage::disk('public')->exists($listing->logo)) {
             Storage::disk('public')->delete($listing->logo);
         }
+        // Delete the listing
         $listing->delete();
+        // Redirect to home with a success message
         return redirect('/')->with('message', 'Listing deleted successfully');
     }
 
     // Manage Listings
+    // Returns the view for managing listings created by the logged-in user
     public function manage() {
         return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
     }

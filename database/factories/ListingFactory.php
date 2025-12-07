@@ -24,6 +24,7 @@ class ListingFactory extends Factory
             'website' => $this->faker->url(),
             'location' => $this->faker->city(),
             'description' => $this->faker->paragraph(5),
+            
         ];
     }
 }

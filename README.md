@@ -1,42 +1,64 @@
-# DevHive
-<<<<<<< HEAD
+##### Overview
+
+DevHive is a web application designed to facilitate the listing of development projects and services, inspired by platforms like Fiverr and Upwork. Built on the Laravel PHP framework, it provides a robust platform for developers to showcase their skills and services to potential clients.
+
+##### Features
+
+1. **User Authentication and Authorization:**
+   - Implements Laravel's authentication system for user login and registration.
+   - Provides role-based access control for administrators and regular users.
+
+2. **Listing Management:**
+   - Users can create and manage listings for their development services.
+   - Supports file uploading and management for project files and documents.
+
+3. **Database Management:**
+   - Utilizes MySQL for database storage.
+   - Implements Laravel migrations and seeders for easy database setup and management.
+
+4. **File Storage and Access:**
+   - Uses Laravel's storage system to manage file uploads.
+   - Creates a symbolic link to make uploaded files publicly accessible.
+
+5. **Admin Panel (PHP Filament):**
+   - Integrates PHP Filament for an admin dashboard.
+   - Provides functionalities for managing users and roles.
+   - Allows administrators to modify admin credentials securely.
+
+6. **Deployment and Development:**
+   - Designed for deployment on local development environments or web servers.
+   - Includes instructions for setting up and running the application.
+
+##### Usage Instructions
+
+- **Setup Instructions:**
+  - Clone the repository from GitHub.
+  - Install PHP dependencies using Composer.
+  - Install Node dependencies using npm.
+  - Configure MySQL database credentials in the `.env` file.
+  - cp env.example env
+  - generate the app key using artisan key:generate
+  - link the storage using artisan storage:link
+  - Run database migrations and seed the database.
+
+- **Running the Application:**
+  - Start the Laravel development server or upload files to a web server.
+  - Access the application in a web browser.
+
+- **Admin Panel and Credentials:**
+  - Access the admin panel using PHP Filament.
+  - Change admin credentials through the application interface.
+
+##### Future Improvements
+- Enhance UI/UX design for better user experience.
+- Expand functionality to include more detailed user profiles and project portfolios.
+
+##### License
+
+The DevHive application is licensed under the MIT License, making it open-sourced software that can be freely used, modified, and distributed.
+
+##### Conclusion
+
+DevHive offers a comprehensive platform for developers to showcase their skills and services. With its user-friendly interface and robust backend, it provides a seamless experience for both developers and clients. Built on Laravel and utilizing modern development practices, DevHive is ready to be deployed and customized for various needs.
 
 
-
-## Usage
-
-### Database Setup
-This app uses MySQL. To use something different, open up config/Database.php and change the default driver.
-
-To use MySQL, make sure you install it, setup a database and then add your db credentials(database, username and password) to the .env.example file and rename it to .env
-
-### Migrations
-To create all the nessesary tables and columns, run the following
-```
-php artisan migrate
-```
-
-### Seeding The Database
-To add the dummy listings with a single user, run the following
-```
-php artisan db:seed
-```
-
-### File Uploading
-When uploading listing files, they go to "storage/app/public". Create a symlink with the following command to make them publicly accessible.
-```
-php artisan storage:link
-```
-
-### Running The App
-Upload the files to your document root, Valet folder or run 
-```
-php artisan serve
-```
-
-## License
-
-The LaraGigs app is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-80% complete
->>>>>>> 6c7c6f073f778fb29899e5a8a11040487eecf3e6

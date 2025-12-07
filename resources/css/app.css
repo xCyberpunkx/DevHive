@@ -1,3 +1,7 @@
-.fm-input-text {
-    color: black !important;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.transition-transform {
+  transition: transform 0.3s ease-in-out;
 }

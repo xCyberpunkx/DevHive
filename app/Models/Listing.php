@@ -9,13 +9,17 @@ class Listing extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'company', 'location', 'website', 'email', 'description', 'tags'];
+    // Define fillable attributes for mass assignment
+    protected $fillable = ['title', 'company', 'location', 'website', 'email','logo', 'description', 'tags'];
 
+    // Scope for filtering listings based on tags and search query
     public function scopeFilter($query, array $filters) {
+        // Filter by tag if provided
         if($filters['tag'] ?? false) {
             $query->where('tags', 'like', '%' . request('tag') . '%');
         }
 
+        // Filter by search query if provided
         if($filters['search'] ?? false) {
             $query->where('title', 'like', '%' . request('search') . '%')
                 ->orWhere('description', 'like', '%' . request('search') . '%')
@@ -23,7 +27,7 @@ class Listing extends Model
         }
     }
 
-    // Relationship To User
+    // Define relationship to User model
     public function user() {
         return $this->belongsTo(User::class);
     }

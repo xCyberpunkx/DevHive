@@ -7,12 +7,14 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "build": "tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --watch"
     },
     "devDependencies": {
-        "axios": "^0.25",
+        "axios": "^1.7.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "tailwindcss": "^3.4.4"
     }
 }
