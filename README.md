@@ -21,7 +21,7 @@ DevHive is a web application designed to facilitate the listing of development p
    - Creates a symbolic link to make uploaded files publicly accessible.
 
 5. **Admin Panel (PHP Filament):**
-   - Integrates PHP Filament for an admin dashboard.
+   - Integrates PHP Filament for an admin dashboard
    - Provides functionalities for managing users and roles.
    - Allows administrators to modify admin credentials securely.
 
