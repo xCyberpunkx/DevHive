@@ -17,9 +17,9 @@ DevHive is a web application designed to facilitate the listing of development p
    - Implements Laravel migrations and seeders for easy database setup and management.
 
 4. **File Storage and Access:**
-   - Uses Laravel's storage system to manage file uploads.
-   - Creates a symbolic link to make uploaded files publicly accessible.
-
+   - Uses Laravel's storage system to manage file uploads
+   - Creates a symbolic link to make uploaded files publicly accessible
+     
 5. **Admin Panel (PHP Filament):**
    - Integrates PHP Filament for an admin dashboard
    - Provides functionalities for managing users and roles.
